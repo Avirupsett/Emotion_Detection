@@ -2,6 +2,5 @@ flask
 gunicorn
 opencv-python
 opencv-contrib-python
-tensorflow==2.0.0
 deepface
 numpy
