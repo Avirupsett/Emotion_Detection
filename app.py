@@ -1,7 +1,7 @@
 from flask import Flask,jsonify,request
 import cv2
 import numpy as np
-# from deepface import DeepFace
+from deepface import DeepFace
 from PIL import Image
 
 app = Flask(__name__)
