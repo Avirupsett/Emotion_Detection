@@ -16,8 +16,11 @@ def process_img():
     file=request.files['image']
     img=Image.open(file.stream)
     opencvImage = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
-    prediction=DeepFace.analyze(opencvImage,actions = ['emotion'])
-    return jsonify({'emotion':prediction['dominant_emotion']})
+    fnam = "opencv image.png"
+    full_image=cv2.imwrite(fnam, opencvImage)
+    full_image=cv2.imread(fnam)
+    prediction=DeepFace.analyze(full_image,actions = ['emotion'])
+    return jsonify({'emotion':prediction[0]['dominant_emotion']})
 
 
 # app.run(host="0.0.0.0",debug=True)
