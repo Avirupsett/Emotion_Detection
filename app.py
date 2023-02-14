@@ -1,6 +1,7 @@
 from flask import Flask,jsonify,request
 import cv2
-from deepface import DeepFace
+import numpy as np
+# from deepface import DeepFace
 from PIL import Image
 
 app = Flask(__name__)
@@ -14,8 +15,8 @@ def home():
 def process_img():
     file=request.files['image']
     img=Image.open(file.stream)
-    full_img=cv2.imread(img)
-    prediction=DeepFace.analyze(full_img,actions = ['emotion'])
+    opencvImage = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
+    prediction=DeepFace.analyze(opencvImage,actions = ['emotion'])
     return jsonify({'emotion':prediction['dominant_emotion']})
 
 
